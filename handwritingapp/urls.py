@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from handwritingapp.views import *
+from handwritingapp.views import IndexView, fetch_data
 from django.conf import settings
 from django.conf.urls.static import static
 

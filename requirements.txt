@@ -1,5 +1,4 @@
 argon2-cffi==20.1.0
-asgiref @ file:///tmp/build/80754af9/asgiref_1594338739818/work
 async-generator==1.10
 attrs==20.2.0
 backcall==0.2.0
