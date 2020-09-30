@@ -2,12 +2,8 @@
 {% load static %}
 {% block content %}
 <style>
-    body {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
     #sig-canvas {
+
         border: 2px dotted #CCCCCC;
         border-radius: 5px;
         cursor: crosshair;
@@ -18,7 +14,7 @@
     }
 </style>
 	<!-- Content -->
-	<div class="container">
+	<div class="container" id="wrapper">
 		<div class="row">
 			<div class="col-md-12">
 				<h1></h1>
@@ -26,7 +22,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-		 		<canvas id="sig-canvas" width="800" height="400">
+		 		<canvas id="sig-canvas" width="800" height="300">
 		 			Get a better browser, bro.
 		 		</canvas>
 		 	</div>

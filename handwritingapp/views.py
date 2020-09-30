@@ -2,11 +2,8 @@ from django.http import Http404, HttpResponse, JsonResponse, HttpResponseBadRequ
 from django.shortcuts import render
 from django.views import View
 import numpy as np
-
+from django.views.decorators.csrf import csrf_exempt
 from handwritingapp.utils.convert_coordinates import convert_coords
-
-def index(request):
-    return render(request, "index.html")
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
@@ -21,6 +18,7 @@ class IndexView(View):
 
         return render(request, 'index.html', {'moves': moves})
 
+@csrf_exempt
 def fetch_data(request):
     if request.is_ajax():
         print(request.POST)
