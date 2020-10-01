@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <style>
     #sig-canvas {
         border: 2px dotted #CCCCCC;
@@ -12,43 +13,43 @@
         width: 100%;
     }
 </style>
-	<!-- Content -->
-	<div class="container" id="wrapper">
-		<div class="row">
-			<div class="col-md-12">
-				<h1></h1>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-		 		<canvas id="sig-canvas">
-		 			Get a better browser, bro.
-		 		</canvas>
-		 	</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<button class="btn btn-primary" id="sig-submitBtn">Submit Signature</button>
-				<button class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
-				<button class="btn btn-default" id="sig-printMoves">Print Moves</button>
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-md-12">
-				<textarea id="sig-dataUrl" class="form-control" rows="5">Data URL for your signature will go here!</textarea>
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-md-12">
-				<img id="sig-image" src="" alt="Your signature will go here!"/>
-			</div>
+
+<!-- Content -->
+<div class="container" id="wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Handwriting App</h1>
 		</div>
 	</div>
-	<!-- Scripts -->
-	<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<!--<script src="https://code.angularjs.org/snapshot/angular.min.js"></script>-->
+	<div class="row">
+		<div class="col-md-12">
+			<label for="sig-canvas">Input Handwritten Text</label>
+			<canvas id="sig-canvas">
+				Get a better browser, pal.
+			</canvas>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<label for="exampleFormControlInput1">Typed Text</label>
+    		<input type="text" class="form-control" id="sig-text" placeholder="Please type the same text as written above.">
+		</div>
+	</div>
+	
+	</br>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-secondary" id="sig-clearBtn">Clear</button>
+			<button class="btn btn-success" id="sig-submitStyle">Submit</button>
+		</div>
+	</div>
+	<br/>
+</div>
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!--<script src="https://code.angularjs.org/snapshot/angular.min.js"></script>-->
 
 {% endblock content %}

@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 def convert_coords(arr):
     input_arr = arr
@@ -11,3 +12,13 @@ def convert_coords(arr):
     relative_coordinates = np.append(relative_coordinates, input_arr[:, 2].reshape((-1, 1)), axis=1)
 
     return relative_coordinates
+
+def get_last_id(req_dir):
+    
+    files = os.listdir(req_dir)
+    nums = []
+    for file in files: 
+        num = int(file.split('-')[1])
+        nums.append(num)
+
+    return max(nums) if len(nums)>0 else 12        

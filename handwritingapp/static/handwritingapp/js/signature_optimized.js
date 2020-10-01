@@ -16,7 +16,6 @@ $( document ).ready(function(){
         return cookieValue;
     };
     const csrftoken = getCookie('csrftoken');
-    console.log(csrftoken);
 
     function changeResolution(canvas, scaleFactor) {
 		// Set up CSS size.
@@ -58,11 +57,9 @@ $( document ).ready(function(){
 	}
 
     // Set up the UI
-    var sigText = document.getElementById("sig-dataUrl");
-    var sigImage = document.getElementById("sig-image");
     var clearBtn = document.getElementById("sig-clearBtn");
-    var submitBtn = document.getElementById("sig-submitBtn");
-    var printBtn = document.getElementById("sig-printMoves");
+    var inputTxt = document.getElementById("sig-text");
+    var submitBtn = document.getElementById("sig-submitStyle");
 
     var moves = [];
    
@@ -260,10 +257,11 @@ $( document ).ready(function(){
 
     }
 
-    clearBtn.addEventListener("click", function() {
+    clearBtn.addEventListener("click", function (e) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        moves = [];
-    }, false);
+        inputTxt.value = '';
+		moves = [];
+	}, false);
 
     // Set-up the canvas and add our event handlers after the page has loaded
     (function init() {
@@ -274,7 +272,6 @@ $( document ).ready(function(){
                  ctx.canvas.width = $("#wrapper").width();
                  ctx.canvas.height = 400;
                 // draw
-                draw();
         
             });
         })();
@@ -295,17 +292,20 @@ $( document ).ready(function(){
     })();
 
     
-    $("#sig-printMoves").click(function(e) {
+    $("#sig-submitStyle").click(function(e) {
         e.preventDefault();
         $.ajax({type: 'POST',
         url: 'fetch_data/',
         //headers: {'X-CSRFToken': csrftoken},                            
-        data: { 'moves': moves },        
-        success: function (response) {                  
-            if (response.result === 'OK') {
-                if (response.data && typeof(response.data) === 'object') {
-                    console.log("Success")
-                }
+        data: { 
+            'moves': moves,
+            'input_text': inputTxt.value,
+                },        
+        success: function (response) {      
+            if (response.result) {
+                alert("Your input has been successfully sent!");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                inputTxt.value = '';
             } else {
                 console.log("Error")
             }
@@ -313,4 +313,14 @@ $( document ).ready(function(){
         });
     });
      
+});
+
+$(document).ready(function(){
+    $('#sig-submitStyle').attr('disabled',true);
+    $('#sig-text').keyup(function(){
+        if($(this).val().length !=0)
+            $('#sig-submitStyle').attr('disabled', false);            
+        else
+            $('#sig-submitStyle').attr('disabled',true);
+    })
 });

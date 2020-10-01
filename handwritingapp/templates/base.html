@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- <link rel="shortcut icon" type="image/png" href="{% static '' %}"/> -->
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'handwritingapp/css/main.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
-  <title style="color:#e4ede4">{% block title %}Handwriting serialization{% endblock %}</title>
+  <title style="color:#00bf16">{% block title %}Handwriting App{% endblock %}</title>
 </head>
 <body>
   <nav class="navbar">
@@ -17,7 +18,7 @@
     </a>
     <div class="d-flex flex-column">
         <div class="d-sm-flex d-block flex-nowrap">
-            <a class="navbar-brand" id="titlenav" href="#">Handwriting app</a>
+            <img class="navbar-brand" width=200 src="{% static 'handwritingapp/images/MPR-logo.png'%}"></img>
         </div>
           <small></small>
         
