@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from handwritingapp.views import IndexView, fetch_data
+from handwritingapp.views import get_index, fetch_data
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='index'),
+    path('', get_index, name='index'),
     path('fetch_data/', fetch_data, name='fetch_data'),
 ]

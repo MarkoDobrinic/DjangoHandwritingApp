@@ -1,0 +1,1 @@
+[[09/29/2020 06:15:57 PM]] Restoring parameters from checkpoints/model-17900
