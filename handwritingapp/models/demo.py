@@ -150,7 +150,6 @@ class Hand(object):
 
 
 if __name__ == '__main__':
-    os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
     hand = Hand()
 
     # usage demo
@@ -166,7 +165,7 @@ if __name__ == '__main__':
     #    "just sit right there"
     #]
     biases = [0.75 for i in lines]
-    styles = [11 for i in lines]
+    styles = [0 for i in lines]
     stroke_colors = ['red', 'green', 'black', 'blue']
     stroke_widths = [1, 2, 1, 2]
 

@@ -4,6 +4,9 @@
 
 ###
 styles/
+handwritingapp/models/logs/
+.vscode/
+.Trash-0/
 
 ### Django ###
 *.log

@@ -17,6 +17,12 @@ $( document ).ready(function(){
     };
     const csrftoken = getCookie('csrftoken');
 
+    function isCanvasBlank(canvas) {
+        return !canvas.getContext('2d')
+          .getImageData(0, 0, canvas.width, canvas.height).data
+          .some(channel => channel !== 0);
+      }
+
     function changeResolution(canvas, scaleFactor) {
 		// Set up CSS size.
 		canvas.style.width = canvas.style.width || canvas.width + 'px';
@@ -258,10 +264,11 @@ $( document ).ready(function(){
     }
 
     clearBtn.addEventListener("click", function (e) {
+        $('#sig-submitStyle').attr('disabled',true);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         inputTxt.value = '';
         moves = [];
-	}, false);
+    }, false);
 
     // Set-up the canvas and add our event handlers after the page has loaded
     (function init() {
@@ -294,35 +301,40 @@ $( document ).ready(function(){
 
     $("#sig-submitStyle").click(function(e) {
         e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: 'fetch_data/',
-            //headers: {'X-CSRFToken': csrftoken},
-            data: {
-                'moves': moves,
-                'input_text': inputTxt.value,
-            },
-            success: function (response) {
-                if (response.result) {
-                    alert("Your input has been successfully sent!");
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    inputTxt.value = '';
-                    moves = [];
-                } else {
-                    console.log("Error")
+        if(($('#sig-text').val().length !=0) && (moves.length != 0) ){
+            $.ajax({
+                type: 'POST',
+                url: 'fetch_data/',
+                //headers: {'X-CSRFToken': csrftoken},
+                data: {
+                    'moves': moves,
+                    'input_text': inputTxt.value,
+                },
+                success: function (response) {
+                    if (response.result) {
+                        alert("Your input has been successfully sent!");
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        inputTxt.value = '';
+                        moves = [];
+                        $('#sig-submitStyle').attr('disabled',true);
+                    } else {
+                        console.log("Error")
+                    }
                 }
-            }
-        });
+            });
+        }
+        
     });
 
-});
 
-$(document).ready(function(){
+$( document ).ready(function(){
     $('#sig-submitStyle').attr('disabled',true);
     $('#sig-text').keyup(function(){
-        if($(this).val().length !=0)
+        if(($('#sig-text').val().length !=0) && (moves.length != 0) )
             $('#sig-submitStyle').attr('disabled', false);
         else
             $('#sig-submitStyle').attr('disabled',true);
     })
+});
+
 });
