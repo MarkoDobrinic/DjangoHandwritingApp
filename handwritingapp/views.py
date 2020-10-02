@@ -24,7 +24,7 @@ def fetch_data(request):
         print(request.POST)
         result = []
         for key, value in enumerate(request.POST):
-            result.append([int(val) for val in request.POST.getlist(value)])
+            result.append([float(val) for val in request.POST.getlist(value)])
         result = np.array(result)
         result = convert_coords(result)
         np.save('result.npy', result)

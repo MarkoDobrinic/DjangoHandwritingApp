@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-            
+
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -22,35 +22,35 @@ $( document ).ready(function(){
 		// Set up CSS size.
 		canvas.style.width = canvas.style.width || canvas.width + 'px';
 		canvas.style.height = canvas.style.height || canvas.height + 'px';
-	
+
 		// Resize canvas and scale future draws.
 		canvas.width = Math.ceil(canvas.width * scaleFactor);
 		canvas.height = Math.ceil(canvas.height * scaleFactor);
 		var ctx = canvas.getContext('2d');
 		ctx.scale(scaleFactor, scaleFactor);
 	}
-	
+
 	function setDPI(canvas, dpi) {
 		// Set up CSS size.
 		canvas.style.width = canvas.style.width || canvas.width + 'px';
 		canvas.style.height = canvas.style.height || canvas.height + 'px';
-	
+
 		// Get size information.
 		var scaleFactor = dpi / 96;
 		var width = parseFloat(canvas.style.width);
 		var height = parseFloat(canvas.style.height);
-	
+
 		// Backup the canvas contents.
 		var oldScale = canvas.width / width;
 		var backupScale = scaleFactor / oldScale;
 		var backup = canvas.cloneNode(false);
 		backup.getContext('2d').drawImage(canvas, 0, 0);
-	
+
 		// Resize the canvas.
 		var ctx = canvas.getContext('2d');
 		canvas.width = Math.ceil(width * scaleFactor);
 		canvas.height = Math.ceil(height * scaleFactor);
-	
+
 		// Redraw the canvas image and scale future draws.
 		ctx.setTransform(backupScale, 0, 0, backupScale, 0, 0);
 		ctx.drawImage(backup, 0, 0);
@@ -65,7 +65,7 @@ $( document ).ready(function(){
     var printBtn = document.getElementById("sig-printMoves");
 
     var moves = [];
-   
+
     // Variables for referencing the canvas and 2dcanvas context
     var canvas,ctx;
 
@@ -82,7 +82,7 @@ $( document ).ready(function(){
     if (canvas.getContext)
         ctx = canvas.getContext('2d');
 
-    // Variables to keep track of the mouse position and left-button status 
+    // Variables to keep track of the mouse position and left-button status
     var mouseX,mouseY,mouseDown=0;
 
     // Variables to keep track of the touch position
@@ -105,21 +105,21 @@ $( document ).ready(function(){
 
         // Draw a filled circle
         ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI*2, true); 
+        ctx.arc(x, y, size, 0, Math.PI*2, true);
         ctx.closePath();
         ctx.fill();
 
-    // Update the hue - increase the "2" value here for a faster cycle through the different colours
-    hue+=2;
+        // Update the hue - increase the "2" value here for a faster cycle through the different colours
+        hue+=2;
 
-    // Go back to the first hue if we've reached the end of the hue range
-    if (hue>360) 
-    hue=0;
-    } 
+        // Go back to the first hue if we've reached the end of the hue range
+        if (hue>360)
+            hue=0;
+        }
 
     function drawLine(ctx,x,y,size) {
 
-        // If lastX is not set, set lastX and lastY to the current position 
+        // If lastX is not set, set lastX and lastY to the current position
         if (lastX==-1) {
             lastX=x;
 	        lastY=y;
@@ -153,8 +153,8 @@ $( document ).ready(function(){
 	// Update the last position to reference the current position
 	lastX=x;
     lastY=y;
-    
-    } 
+
+    }
 
     // Clear the canvas context using the canvas width and height
     function clearCanvas(canvas,ctx) {
@@ -181,7 +181,7 @@ $( document ).ready(function(){
     }
 
     // Keep track of the mouse position and draw a dot if mouse button is currently pressed
-    function sketchpad_mouseMove(e) { 
+    function sketchpad_mouseMove(e) {
         // Update the mouse co-ordinates when moved
         getMousePos(e);
 
@@ -214,19 +214,19 @@ $( document ).ready(function(){
 
         //drawDot(ctx,touchX,touchY,10);
         drawLine(ctx, touchX, touchY,6);
-        moves.push([touchX, touchY, 0]);
+        //moves.push([touchX, touchY, 0]);
 
         // Prevents an additional mousedown event being triggered
         e.preventDefault();
     }
 
     // Draw something and prevent the default scrolling when touch movement is detected
-    function sketchpad_touchMove(e) { 
+    function sketchpad_touchMove(e) {
         // Update the touch co-ordinates
         getTouchPos(e);
 
         // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-        //drawDot(ctx,touchX,touchY,10); 
+        //drawDot(ctx,touchX,touchY,10);
         drawLine(ctx, touchX, touchY,6);
         moves.push([touchX, touchY, 0]);
 
@@ -242,13 +242,13 @@ $( document ).ready(function(){
         //if (!e)
           //  var e = event;
 
-        if(e.touches) {
-            if (e.touches.length == 1) { // Only deal with one finger
+        //if(e.touches) {
+        //    if (e.touches.length == 1) { // Only deal with one finger
                 var touch = e.touches[0]; // Get the information for finger #1
-                touchX=touch.pageX-touch.target.offsetLeft;
-                touchY=touch.pageY-touch.target.offsetTop;
-            }
-        }
+                touchX=touch.pageX - 100;//-touch.target.offsetLeft;
+                touchY=touch.pageY - 50;//-touch.target.offsetTop;
+        //    }
+        //}
     }
 
     function sketchpad_touchEnd() {
@@ -268,20 +268,20 @@ $( document ).ready(function(){
     // Set-up the canvas and add our event handlers after the page has loaded
     (function init() {
         (function(){
-            
+
             $(function(){
                 // set width and height
                  ctx.canvas.width = $("#wrapper").width();
                  ctx.canvas.height = 400;
                 // draw
                 draw();
-        
+
             });
         })();
 
         // Check that we have a valid context to draw on/with before adding event handlers
         if (ctx) {
-           
+
             // React to mouse events on the canvas, and mouseup on the entire document
             canvas.addEventListener('mousedown', sketchpad_mouseDown, false);
             canvas.addEventListener('mousemove', sketchpad_mouseMove, false);
@@ -294,14 +294,14 @@ $( document ).ready(function(){
         }
     })();
 
-    
+
     $("#sig-printMoves").click(function(e) {
         e.preventDefault();
         $.ajax({type: 'POST',
         url: 'fetch_data/',
-        //headers: {'X-CSRFToken': csrftoken},                            
-        data: { 'moves': moves },        
-        success: function (response) {                  
+        //headers: {'X-CSRFToken': csrftoken},
+        data: { 'moves': moves },
+        success: function (response) {
             if (response.result === 'OK') {
                 if (response.data && typeof(response.data) === 'object') {
                     console.log("Success")
@@ -312,5 +312,5 @@ $( document ).ready(function(){
         }
         });
     });
-     
+
 });
