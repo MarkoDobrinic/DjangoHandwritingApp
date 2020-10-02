@@ -12,6 +12,7 @@ def convert_coords(input_arr):
 
     return relative_coordinates
 
+
 def get_last_id(req_dir):
 
     files = os.listdir(req_dir)

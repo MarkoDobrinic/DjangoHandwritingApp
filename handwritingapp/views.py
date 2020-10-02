@@ -14,8 +14,9 @@ def get_index(request):
     
 @csrf_exempt
 def fetch_data(request):
-    os.makedirs(STYLES_PATH, exist_ok=True)
-    
+    os.makedirs(os.path.join(os.getcwd(), 'styles'), exist_ok=True)
+
+    styles_dir = os.path.join(os.getcwd(), 'styles')
     if request.is_ajax():
         result = []
         input_text = request.POST.get('input_text')
