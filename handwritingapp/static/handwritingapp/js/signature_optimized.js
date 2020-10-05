@@ -181,6 +181,7 @@ $( document ).ready(function(){
         lastX=-1;
         lastY=-1;
         moves.push([mouseX, mouseY, 1]);
+        console.log(moves);
     }
 
     // Keep track of the mouse position and draw a dot if mouse button is currently pressed
@@ -191,7 +192,7 @@ $( document ).ready(function(){
         // Draw a dot if the mouse button is currently being pressed
         if (mouseDown==1) {
             //drawDot(ctx,mouseX,mouseY,10);
-            drawLine(ctx, mouseX, mouseY,6);
+            drawLine(ctx, mouseX, mouseY, 6);
             moves.push([mouseX, mouseY, 0]);
         }
 
@@ -245,13 +246,13 @@ $( document ).ready(function(){
         //if (!e)
           //  var e = event;
 
-        //if(e.touches) {
-        //    if (e.touches.length == 1) { // Only deal with one finger
+        if(e.touches) {
+            if (e.touches.length == 1) { // Only deal with one finger
                 var touch = e.touches[0]; // Get the information for finger #1
-                touchX=touch.pageX - 100;//-touch.target.offsetLeft;
-                touchY=touch.pageY - 50;//-touch.target.offsetTop;
-        //    }
-        //}
+                touchX=touch.pageX - touch.target.offsetLeft;
+                touchY=touch.pageY - touch.target.offsetTop;
+            }
+        }
     }
 
     function sketchpad_touchEnd() {
@@ -305,11 +306,13 @@ $( document ).ready(function(){
             $.ajax({
                 type: 'POST',
                 url: 'fetch_data/',
+                dataType: "json",
+                contentType: 'application/json',
                 //headers: {'X-CSRFToken': csrftoken},
-                data: {
+                data: JSON.stringify({
                     'moves': moves,
                     'input_text': inputTxt.value,
-                },
+                }),
                 success: function (response) {
                     if (response.result) {
                         alert("Your input has been successfully sent!");
