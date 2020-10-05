@@ -1,5 +1,6 @@
 import os
 import logging
+import argparse
 
 import numpy as np
 import svgwrite
@@ -7,6 +8,13 @@ import svgwrite
 import drawing
 import lyrics
 from rnn import rnn
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--use-gpu', action='store_true')
+    args = parser.parse_args()
+    return args
 
 
 class Hand(object):
@@ -150,6 +158,11 @@ class Hand(object):
 
 
 if __name__ == '__main__':
+    args = parse_args()
+
+    if not args.use_gpu:
+        os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
     hand = Hand()
 
     # usage demo
