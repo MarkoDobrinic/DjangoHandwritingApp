@@ -10,6 +10,8 @@ def convert_coords(input_arr):
     relative_coordinates = input_arr[:, 0:2] - input_arr_shifted
     relative_coordinates = np.append(relative_coordinates, input_arr[:, 2].reshape((-1, 1)), axis=1)
 
+    relative_coordinates[:,1] *= -1
+    
     return relative_coordinates
 
 
