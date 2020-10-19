@@ -1,7 +1,11 @@
 .container h1 {
-    color: #00bf16;
+    color: seagreen;
 }
 
 body {
     background-color: white;
+}
+
+body a, a:hover{
+    color : seagreen;
 }

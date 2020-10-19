@@ -19,7 +19,6 @@ from django.conf import settings
 from handwritingapp.views import get_index, fetch_data
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
