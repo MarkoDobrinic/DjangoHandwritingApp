@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 from handwritingapp.views import get_index, fetch_data
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', get_index, name='index'),
     path('fetch_data/', fetch_data, name='fetch_data'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -315,7 +315,12 @@ $( document ).ready(function(){
                 }),
                 success: function (response) {
                     if (response.result) {
-                        alert("Your input has been successfully sent!");
+                        
+                        $("#dl-btn").attr({
+                            "href" : response.zip_path,
+                        });
+                        $('#dl-btn').get(0).click();
+
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
                         inputTxt.value = '';
                         moves = [];
@@ -331,6 +336,7 @@ $( document ).ready(function(){
 
 
 $( document ).ready(function(){
+    $('#dl-btn').hide();
     $('#sig-submitStyle').attr('disabled',true);
     $('#sig-text').keyup(function(){
         if(($('#sig-text').val().length !=0) && (moves.length != 0) )

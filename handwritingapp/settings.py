@@ -122,7 +122,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
+MEDIA_URL = os.path.join(BASE_DIR, 'handwritingapp', 'models', 'downloads/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'handwritingapp', 'models', 'downloads')
+
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
