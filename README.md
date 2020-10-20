@@ -1,5 +1,9 @@
 # DjangoHandwritingApp
 
+## Google Colab notebook link
+
+https://colab.research.google.com/drive/1yQQQNfEISsQD1DX3tTwe09nafyMRaaSN?usp=sharing
+
 ## Virtual environment
 ```
 python -m venv env
