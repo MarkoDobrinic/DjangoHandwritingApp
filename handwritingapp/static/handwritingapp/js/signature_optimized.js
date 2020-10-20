@@ -169,8 +169,7 @@ $( document ).ready(function(){
         mouseDown=1;
         //drawDot(ctx,mouseX,mouseY,10);
         drawLine(ctx, mouseX, mouseY,6);
-        moves.push([mouseX, mouseY, 0]);
-
+        moves.push([mouseX, mouseY, 1]);
     }
 
     // Keep track of the mouse button being released
@@ -180,7 +179,7 @@ $( document ).ready(function(){
         // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
         lastX=-1;
         lastY=-1;
-        moves.push([mouseX, mouseY, 1]);
+        moves.push([mouseX, mouseY, 0]);
         console.log(moves);
     }
 
